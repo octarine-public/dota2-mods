@@ -1,0 +1,15 @@
+[
+    "foilage",
+    "dark_terrain",
+    "mute_ambient_sounds",
+    "minify_base_attacks",
+    "minify_spells_items",
+    "misc_optimization",
+    "remove_weather_effects",
+    "remove_river",
+    "remove_sprays",
+    "remove_pings",
+    "mute_default_announcer",
+    "mute_taunt_sounds",
+    "mute_voice_line_sounds"
+]

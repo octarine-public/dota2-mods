@@ -1,0 +1,70 @@
+{
+    "foilage": {
+        "name": "Remove Foilage",
+        "description": "Removes trees and grass from the map for better visibility\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "dark_terrain": {
+        "name": "Dark Terrain",
+        "description": "Makes terrain darker for better contrast and visibility\nRequires map restart to apply changes",
+        "defaultState": false,
+        "dependencies": [
+            "foilage"
+        ]
+    },
+    "mute_ambient_sounds": {
+        "name": "Mute Ambient Sounds",
+        "description": "Removes background ambient sounds for better focus\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "minify_base_attacks": {
+        "name": "Minify Base Attacks",
+        "description": "Reduces visual effects of basic attack animations\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "minify_spells_items": {
+        "name": "Minify Spells & Items",
+        "description": "Reduces visual effects of spells and item usage\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "misc_optimization": {
+        "name": "Misc Optimization",
+        "description": "Various performance optimizations and improvements\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "remove_weather_effects": {
+        "name": "Remove Weather Effects",
+        "description": "Removes rain, snow and other weather effects\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "remove_river": {
+        "name": "Remove River",
+        "description": "Removes river water effects for better performance\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "remove_sprays": {
+        "name": "Remove Sprays",
+        "description": "Removes player spray effects from the map\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "remove_pings": {
+        "name": "Remove Pings",
+        "description": "Removes player ping indicators and signals\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "mute_default_announcer": {
+        "name": "Mute Default Announcer",
+        "description": "Disables the default game announcer voice\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "mute_taunt_sounds": {
+        "name": "Mute Taunt Sounds",
+        "description": "Disables taunt sound effects\nRequires map restart to apply changes",
+        "defaultState": false
+    },
+    "mute_voice_line_sounds": {
+        "name": "Mute Voice Line Sounds",
+        "description": "Disables hero voice lines and responses\nRequires map restart to apply changes",
+        "defaultState": false
+    }
+}
