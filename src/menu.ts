@@ -1,4 +1,3 @@
-import { Menu } from "github.com/octarine-public/wrapper/index"
 
 interface ModConfig {
 	name: string

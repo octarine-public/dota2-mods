@@ -1,6 +1,5 @@
 import "./translations"
 
-import { Utils, tryFindFile } from "github.com/octarine-public/wrapper/index"
 import { MenuManager } from "./menu"
 
 interface ModConfig {
@@ -9,8 +8,8 @@ interface ModConfig {
 }
 
 new (class CDota2Minify {
-	private readonly modIds: string[] = Utils.readJSON("mods/index.json")
-	private readonly config: Record<string, ModConfig> = Utils.readJSON("mods/config.json")
+	private readonly modIds: string[] = SharedSDK.readJSON("mods/index.json")
+	private readonly config: Record<string, ModConfig> = SharedSDK.readJSON("mods/config.json")
 	private readonly menu = new MenuManager(this.modIds, this.config)
 	private readonly redirects = new Map<string, Record<string, string>>()
 	private readonly handles = new Map<string, number>()
@@ -23,12 +22,12 @@ new (class CDota2Minify {
 
 	private resolveRedirects() {
 		for (const mod of this.modIds) {
-			const entries: Record<string, string> = Utils.readJSON(
+			const entries: Record<string, string> = SharedSDK.readJSON(
 				`mods/${mod}/entry-point.json`
 			)
 			const resolved: Record<string, string> = {}
 			for (const [key, val] of Object.entries(entries)) {
-				const path = tryFindFile(val)
+				const path = SharedSDK.tryFindFile(val)
 				if (path !== undefined) {
 					resolved[key] = path
 				}
