@@ -5,12 +5,11 @@ declare namespace MenuSDK {
 	 * 0 (fully closed) to 1 (fully open) across `MenuFlags.MenuOpenDuration`; the
 	 * selected effect shapes it into the frame's opacity multiplier and backdrop
 	 * blur fraction, both landing on the theme's own opacity and blur at 1.
-	 * Closing runs the progress backwards at the same rate, so it is the exact
-	 * time reverse of opening, from any point mid-flight. Surfaces that stand
-	 * beside the window rather than inside it - a preview card and its stage -
-	 * follow the same progress, so the menu opens as one thing. The module also
-	 * owns the native backdrop capture, keeping it alive until a closing window
-	 * has fully faded out.
+	 * Closing has no motion: the progress drops to 0 and the window leaves the
+	 * same frame, from any point mid-open. Surfaces that stand beside the window
+	 * rather than inside it - a preview card and its stage - follow the same
+	 * progress, so the menu opens as one thing. The module also owns the native
+	 * backdrop capture, releasing it the moment the window closes.
 	 */
 	interface OpenEffect {
 		readonly name: string
@@ -20,8 +19,16 @@ declare namespace MenuSDK {
 		readonly blur: (t: number) => number
 	}
 	const OpenEffects: OpenEffect[]
-	/** True while the closing animation still needs the window mounted. */
-	function MenuMotionHolds(): boolean
+	/**
+	 * The open effect the menu is set to, for a surface that comes in on the window's own terms
+	 * without standing inside it - a HUD card that opens the way the menu does.
+	 *
+	 * @example
+	 * surface.Fade(ActiveOpenEffect().opacity(t))
+	 */
+	function ActiveOpenEffect(): OpenEffect
+	/** How long the menu's open motion runs at the designed pace, in ms. */
+	function OpenDuration(): number
 	/**
 	 * Puts a surface standing outside the window on the window's own open motion, or takes it off
 	 * again; `glass` is the layer inside it carrying the backdrop blur, for one that is frosted.

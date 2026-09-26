@@ -15,6 +15,12 @@ declare namespace MenuSDK {
 		readonly resolveAsset?: (path: string) => string
 		readonly resolveImage?: (value: string) => string
 		/**
+		 * Whether `path` is art whose shape is its alpha alone, to be loaded white on alpha. A game's
+		 * ability icons are such silhouettes, and the colour under them is whatever each source file
+		 * held; a host that does not answer loads every image as it is.
+		 */
+		readonly monochromeArt?: (path: string) => boolean
+		/**
 		 * The hero behind an ability name, where the name is a hero's own ability rather than an
 		 * item: the hero's data name — {@link MenuHost.resolveImage} turns it into their portrait —
 		 * and the number of the button that casts it, 1 to 4. A window's sidebar shows it as a
@@ -100,6 +106,13 @@ declare namespace MenuSDK {
 	function HostMeasureText(text: string, font: string, sizePx: number, weight: number, italic?: boolean): Nullable<[number, number]>
 	/** Image size in px, cached like HostMeasureText. */
 	function HostImageSize(path: string): Nullable<[number, number]>
+	/**
+	 * Whether the host has a source decoded and in hand, asked afresh every time: a sized copy is
+	 * cut in the background after it is minted, and this is what says the cut is done. Nothing is
+	 * cached and no measure miss is noted - the answer is expected to change, and the next frame is
+	 * the time to ask again. A host that cannot say is taken at its word that the source is ready.
+	 */
+	function HostImageReady(path: string): boolean
 	function HostInGame(): boolean
 	function HostInputCaptured(): boolean
 	/** Seconds on the match clock; see {@link MenuHost.gameTime}. */
@@ -213,6 +226,8 @@ declare namespace MenuSDK {
 		Clip?(): Nullable<string>
 		/** The elements drawn over the stage, as structure — the frame pass positions them. */
 		Stage(): React.ReactNode
+		/** Whether stage elements may extend beyond the preview. Defaults to hidden. */
+		readonly Overflow?: "visible" | "hidden"
 		Header?(): React.ReactNode
 		Footer?(): React.ReactNode
 		/** Frame pass over the stage, in its own pixels. */
