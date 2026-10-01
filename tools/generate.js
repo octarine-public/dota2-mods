@@ -13,55 +13,68 @@ const PORTABLE_MODS = {
     "Remove Foilage": {
         id: "foilage",
         name: "Remove Foilage",
+        description: "Removes grass, bushes, rocks and other decorative clutter from the map. Takes effect after reloading the map.",
     },
     "Dark Terrain": {
         id: "dark_terrain",
         name: "Dark Terrain",
+        description: "Darkens the ground so heroes and effects stand out on it. Also turns on Remove Foilage. Takes effect after reloading the map.",
         dependencies: ["foilage"],
     },
     "Mute Ambient Sounds": {
         id: "mute_ambient_sounds",
         name: "Mute Ambient Sounds",
+        description: "Mutes the background sounds of the map: birds, bats, the river, the waterfall and the hum of the Ancients. Takes effect after reloading the map.",
     },
     "Minify Base Attacks": {
         id: "minify_base_attacks",
         name: "Minify Base Attacks",
+        description: "Simplifies the projectiles and hit flashes of basic attacks. Takes effect after reloading the map.",
     },
     "Minify Spells & Items": {
         id: "minify_spells_items",
         name: "Minify Spells & Items",
+        description: "Simplifies the effects of spells and items, so fights are easier to read. Takes effect after reloading the map.",
     },
     "Misc Optimization": {
         id: "misc_optimization",
         name: "Misc Optimization",
+        description: "Removes minor effects: cosmetic and event particles, tower shots and the ambience of bases, fountains and outposts. Takes effect after reloading the map.",
     },
     "Remove Weather Effects": {
         id: "remove_weather_effects",
         name: "Remove Weather Effects",
+        description: "Removes rain, snow and other weather effects along with their sounds. Takes effect after reloading the map.",
     },
     "Remove River": {
         id: "remove_river",
         name: "Remove River",
+        description: "Removes the water in the river and fountains, its splashes and the sound of wading. Takes effect after reloading the map.",
     },
     "Remove Sprays": {
         id: "remove_sprays",
         name: "Remove Sprays",
+        description: "Removes the sprays players leave on the map. Takes effect after reloading the map.",
     },
     "Remove Pings": {
         id: "remove_pings",
         name: "Remove Pings",
+        description: "Removes ping markers and their sounds. Takes effect after reloading the map.",
     },
     "Mute Default Announcer": {
         id: "mute_default_announcer",
         name: "Mute Default Announcer",
+        description: "Mutes the default announcer. Takes effect after reloading the map.",
     },
     "Mute Taunt Sounds": {
         id: "mute_taunt_sounds",
         name: "Mute Taunt Sounds",
+        description: "Mutes the sounds of hero taunts. Takes effect after reloading the map.",
     },
     "Mute Voice Line Sounds": {
         id: "mute_voice_line_sounds",
         name: "Mute Voice Line Sounds",
+        description: "Mutes chat wheel voice lines and sounds. Takes effect after reloading the map.",
     },
 };
 
@@ -204,7 +217,7 @@ function run() {
     const modIds = [];
 
     for (const [minifyName, modDef] of Object.entries(PORTABLE_MODS)) {
-        const { id, name, dependencies } = modDef;
+        const { id, name, description, dependencies } = modDef;
         const srcModDir = path.join(MINIFY_MODS_DIR, minifyName);
         const destModDir = path.join(OUTPUT_MODS_DIR, id);
 
@@ -254,7 +267,7 @@ function run() {
             "utf-8"
         );
 
-        const modConfig = { name };
+        const modConfig = { name, description, defaultState: false };
         if (dependencies && dependencies.length > 0) {
             modConfig.dependencies = dependencies;
         }
